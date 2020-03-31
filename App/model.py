@@ -85,60 +85,42 @@ def addDateTree (catalog, row):
 
 # Funciones de consulta
 
-
-def getBookTree (catalog, bookTitle):
+def getAccidentByDateSeverity (catalog, date):
     """
-    Retorna el libro desde el mapa a partir del titulo (key)
+    Retorna la cantidad de libros para un año y con un rating dado
     """
-    return tree.get(catalog['booksTitleTree'], bookTitle, greater)
-
-def rankBookTree (catalog, bookTitle):
-    """
-    Retorna la cantidad de llaves menores (titulos) dentro del arbol
-    """
-    return tree.rank(catalog['booksTitleTree'], bookTitle, greater)
-
-def selectBookTree (catalog, pos):
-    """
-    Retorna la operación select (titulos) dentro del arbol
-    """
-    return tree.select(catalog['booksTitleTree'], pos) 
-
-def getBookByYearRating (catalog, year):
-    """
-    Retorna la cantidad de libros por rating para un año
-    """
-    yearElement=tree.get(catalog['yearsTree'], strToDate(year,'%Y'), greater)
+    
+    dateElement = tree.get(catalog['dateTree'], strToDate(date,'%Y-%m-%d') , greater)
     response=''
-    if yearElement:
-        ratingList = map.keySet(yearElement['ratingMap'])
+    if dateElement:
+        ratingList = map.keySet(dateElement['severityMap'])
         iteraRating=it.newIterator(ratingList)
         while it.hasNext(iteraRating):
             ratingKey = it.next(iteraRating)
-            response += 'Rating '+str(ratingKey) + ':' + str(map.get(yearElement['ratingMap'],ratingKey,compareByKey)) + '\n'
+            response += 'Severity '+str(ratingKey) + ':' + str(map.get(dateElement['severityMap'],ratingKey,compareByKey)) + '\n'
         return response
     return None
 
-
-def getBooksCountByYearRange (catalog, years):
-    """
-    Retorna la cantidad de libros por rating para un rango de años
-    """
+def getAccidentsByDateRange (catalog, dates):
     
-    startYear = strToDate(years.split(" ")[0],'%Y')
-    endYear = strToDate(years.split(" ")[1],'%Y')
-    yearList = tree.valueRange(catalog['yearsTree'], startYear, endYear, greater)
-    counter = 0
-    if yearList:
-        iteraYear=it.newIterator(yearList)
-        while it.hasNext(iteraYear):
-            yearElement = it.next(iteraYear)
-            #print(yearElement['year'],yearElement['count'])
-            counter += yearElement['count']
-        return counter
+    startDate = strToDate(dates.split(" ")[0],'%Y-%m-%d')
+    endDate = strToDate(dates.split(" ")[1],'%Y-%m-%d')
+    dateList = tree.valueRange(catalog['dateTree'], startDate, endDate, greater)
+   # print(dateList)
+    #hol= lt.getElement(dateList,13)
+    #print(hol)
+    iteraDates = it.newIterator(dateList)
+    while it.hasNext(iteraDates):
+        dateElement = it.next(iteraDates)
+        response=''
+        if dateElement:
+            citiesList = map.keySet(dateElement['cityMap'])
+            iteraCities = it.newIterator(citiesList)
+            while it.hasNext(iteraCities):
+                cityKey = it.next(iteraCities)
+                response += 'City '+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
+            return response
     return None
-
-
 
 # Funciones de comparacion
 
