@@ -45,7 +45,7 @@ def printMenu():
     print("3- Consultar cuantos libros hay alfabeticamente menores a una llave (titulo) - (rank)")
     print("4- Buscar un libro por posición de la llave (titulo) - (select)")
     print("5- Consultar la cantidad de libros por rating para un año dado")
-    print("6- Consultar la cantidad de libros por rating para un rango de años")
+    print("6- Consultar la cantidad de libros para un rango de años")
 
     print("0- Salir")
 
@@ -76,11 +76,11 @@ def main():
             print("Recursion Limit:",sys.getrecursionlimit())
             catalog = initCatalog ()
             loadData (catalog)
-            print ('Tamaño Lista libros cargados: ' + str(lt.size(catalog['booksList'])))
-            print ('Tamaño árbol Libros por titulo: ' + str(map.size(catalog['booksTitleTree'])))
-            print ('Tamaño árbol Libros por año : ' + str(map.size(catalog['yearsTree'])))
-            print ('Altura árbol por titulo: ' + str(map.height(catalog['booksTitleTree'])))
-            print ('Altura árbol por año: ' + str(map.height(catalog['yearsTree'])))
+            #print ('Tamaño Lista libros cargados: ' + str(lt.size(catalog['booksList'])))
+            #print ('Tamaño árbol Libros por titulo: ' + str(map.size(catalog['booksTitleTree'])))
+            #print ('Tamaño árbol Libros por año : ' + str(map.size(catalog['yearsTree'])))
+            #print ('Altura árbol por titulo: ' + str(map.height(catalog['booksTitleTree'])))
+            #print ('Altura árbol por año: ' + str(map.height(catalog['yearsTree'])))
         elif int(inputs[0])==2:
             title = input("Nombre del titulo a buscar: ")
             book = controller.getBookTree(catalog,title)
