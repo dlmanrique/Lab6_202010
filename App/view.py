@@ -81,10 +81,8 @@ def main():
         elif int(inputs[0])==2:
             dates = input("Ingrese los las fechas desde y hasta (YYYY-MM-DD YYYY-MM-DD):")
             counter = controller.getAccidentsByDateRange(catalog, dates) 
-            if counter:
-                print("Cantidad de accidentes entre las fechas por ciudad",dates,":\n",counter)
-            else:
-                print("No se encontraron accidentes para el rango de fechas",dates) 
+            print("Cantidad de accidentes entre las fechas por ciudad",dates,":\n",counter)
+
         else:
             sys.exit(0)
     sys.exit(0)

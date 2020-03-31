@@ -120,12 +120,11 @@ def getAccidentsByDateRange (catalog, dates):
             while it.hasNext(iteraCities):
                 cityKey = it.next(iteraCities)
                 new = map.get(dateElement['cityMap'],cityKey,compareByKey)
+                count += new
                 if cityKey in cities.keys():
                     cities[cityKey] += new
-                    count += new
                 else:
                     cities[cityKey]=new
-                    count += new
                 #response += ''+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
     response = 'Total de accidentes en el rango: '+str(count)+'\n'
     for i in cities:
