@@ -55,7 +55,7 @@ def newDate (date, row):
     Crea una nueva estructura para almacenar los accidentes por fecha 
     """
     dateNode = {"date": date, "cityMap":None}
-    dateNode ['cityMap'] = map.newMap(1000,maptype='CHAINING')
+    dateNode ['cityMap'] = map.newMap(2999,maptype='CHAINING') #5966 ciudades
     city = row['City']
     map.put(dateNode['cityMap'],city,1, compareByKey)
     return dateNode
@@ -97,7 +97,7 @@ def getAccidentByDateSeverity (catalog, date):
         iteraRating=it.newIterator(ratingList)
         while it.hasNext(iteraRating):
             ratingKey = it.next(iteraRating)
-            response += 'Severity '+str(ratingKey) + ':' + str(map.get(dateElement['severityMap'],ratingKey,compareByKey)) + '\n'
+            response += ''+str(ratingKey) + ':' + str(map.get(dateElement['severityMap'],ratingKey,compareByKey)) + '\n'
         return response
     return None
 
@@ -118,7 +118,7 @@ def getAccidentsByDateRange (catalog, dates):
             iteraCities = it.newIterator(citiesList)
             while it.hasNext(iteraCities):
                 cityKey = it.next(iteraCities)
-                response += 'City '+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
+                response += ''+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
             return response
     return None
 
