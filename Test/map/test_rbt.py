@@ -118,7 +118,59 @@ class RBTreeTest (unittest.TestCase):
         print("\nRBT keys between R and X")
         print (kList)
 
+    def test_valueRange (self):
+        """
+        """
+        tree = omap.newMap ()
+        tree = omap.put (tree, 'A', 'Title 50', self.comparekeys)
+        tree = omap.put (tree, 'C', 'Title 70', self.comparekeys)
+        tree = omap.put (tree, 'E', 'Title 30', self.comparekeys)
+        tree = omap.put (tree, 'H', 'Title 80', self.comparekeys)        
+        tree = omap.put (tree, 'L', 'Title 90', self.comparekeys)
+        tree = omap.put (tree, 'M', 'Title 20', self.comparekeys)
+        tree = omap.put (tree, 'P', 'Title 50', self.comparekeys)
+        tree = omap.put (tree, 'R', 'Title 60', self.comparekeys)
+        tree = omap.put (tree, 'S', 'Title 10', self.comparekeys)
+        tree = omap.put (tree, 'X', 'Title 40', self.comparekeys)
+        vList = omap.valueRange(tree, 'M', 'W', self.comparekeys)
+        size = lt.size(vList)
+        self.assertEqual((size),4)
+        print("\nValores entre M y W")
+        print (vList)
+        
+    def test_floor (self):
+        """
+        """
+        tree = omap.newMap ()
+        tree = omap.put (tree, 'A', 'Title 50', self.comparekeys)
+        tree = omap.put (tree, 'C', 'Title 70', self.comparekeys)
+        tree = omap.put (tree, 'E', 'Title 30', self.comparekeys)
+        tree = omap.put (tree, 'H', 'Title 80', self.comparekeys)        
+        tree = omap.put (tree, 'L', 'Title 90', self.comparekeys)
+        tree = omap.put (tree, 'M', 'Title 20', self.comparekeys)
+        tree = omap.put (tree, 'P', 'Title 50', self.comparekeys)
+        tree = omap.put (tree, 'R', 'Title 60', self.comparekeys)
+        tree = omap.put (tree, 'S', 'Title 10', self.comparekeys)
+        tree = omap.put (tree, 'X', 'Title 40', self.comparekeys)
+        res=omap.floor(tree, 'T', self.comparekeys)
+        self.assertEqual(res['key'],'S')
 
+    def test_ceiling (self):
+        """
+        """
+        tree = omap.newMap ()
+        tree = omap.put (tree, 'A', 'Title 50', self.comparekeys)
+        tree = omap.put (tree, 'C', 'Title 70', self.comparekeys)
+        tree = omap.put (tree, 'E', 'Title 30', self.comparekeys)
+        tree = omap.put (tree, 'H', 'Title 80', self.comparekeys)        
+        tree = omap.put (tree, 'L', 'Title 90', self.comparekeys)
+        tree = omap.put (tree, 'M', 'Title 20', self.comparekeys)
+        tree = omap.put (tree, 'P', 'Title 50', self.comparekeys)
+        tree = omap.put (tree, 'R', 'Title 60', self.comparekeys)
+        tree = omap.put (tree, 'S', 'Title 10', self.comparekeys)
+        tree = omap.put (tree, 'X', 'Title 40', self.comparekeys)
+        res=omap.ceiling(tree,'G',self.comparekeys)
+        self.assertEqual(res['key'],'H')  
 
 if __name__ == "__main__":
     unittest.main()
