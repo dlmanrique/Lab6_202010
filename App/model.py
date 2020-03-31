@@ -127,16 +127,14 @@ def getAccidentsByDateRange (catalog, dates):
                     cities[cityKey]=new
                     count += new
                 #response += ''+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
-    if dateList:
-        response = 'Total de accidentes en el rango: '+str(count)+'\n'
-        for i in cities:
-            response += str(i)+": "+str(cities[i])+"\n"
+    response = 'Total de accidentes en el rango: '+str(count)+'\n'
+    for i in cities:
+        response += str(i)+": "+str(cities[i])+"\n"
             #print (i, cities[i])
             #response += str(i[0])+": "+str(i[1])+"\n"
         
-        return response
-    else:
-        return None
+    return response
+   
 # Funciones de comparacion
 
 def compareByKey (key, element):
