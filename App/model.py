@@ -110,18 +110,33 @@ def getAccidentsByDateRange (catalog, dates):
     #hol= lt.getElement(dateList,13)
     #print(hol)
     iteraDates = it.newIterator(dateList)
+    cities = {}
+    count = 0
     while it.hasNext(iteraDates):
         dateElement = it.next(iteraDates)
-        response=''
         if dateElement:
             citiesList = map.keySet(dateElement['cityMap'])
             iteraCities = it.newIterator(citiesList)
             while it.hasNext(iteraCities):
                 cityKey = it.next(iteraCities)
-                response += ''+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
-            return response
-    return None
-
+                new = map.get(dateElement['cityMap'],cityKey,compareByKey)
+                if cityKey in cities.keys():
+                    cities[cityKey] += new
+                    count += new
+                else:
+                    cities[cityKey]=new
+                    count += new
+                #response += ''+str(cityKey) + ':' + str(map.get(dateElement['cityMap'],cityKey,compareByKey)) + '\n'
+    if dateList:
+        response = 'Total de accidentes en el rango: '+str(count)+'\n'
+        for i in cities:
+            response += str(i)+": "+str(cities[i])+"\n"
+            #print (i, cities[i])
+            #response += str(i[0])+": "+str(i[1])+"\n"
+        
+        return response
+    else:
+        return None
 # Funciones de comparacion
 
 def compareByKey (key, element):
